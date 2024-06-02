@@ -1,0 +1,73 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.math.BigInteger;
+
+public class Main {
+
+    public static BigInteger min(String filename) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = br.readLine();
+            String[] numbers = line.split(" ");
+            BigInteger min = new BigInteger(numbers[0]);
+            for (int i = 1; i < numbers.length; i++) {
+                BigInteger current = new BigInteger(numbers[i]);
+                if (current.compareTo(min) < 0) {
+                    min = current;
+                }
+            }
+            return min;
+        }
+    }
+
+    public static BigInteger max(String filename) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = br.readLine();
+            String[] numbers = line.split(" ");
+            BigInteger max = new BigInteger(numbers[0]);
+            for (int i = 1; i < numbers.length; i++) {
+                BigInteger current = new BigInteger(numbers[i]);
+                if (current.compareTo(max) > 0) {
+                    max = current;
+                }
+            }
+            return max;
+        }
+    }
+
+    public static BigInteger sum(String filename) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = br.readLine();
+            String[] numbers = line.split(" ");
+            BigInteger sum = BigInteger.ZERO;
+            for (String num : numbers) {
+                sum = sum.add(new BigInteger(num));
+            }
+            return sum;
+        }
+    }
+
+    public static BigInteger mult(String filename) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = br.readLine();
+            String[] numbers = line.split(" ");
+            BigInteger mult = BigInteger.ONE;
+            for (String num : numbers) {
+                mult = mult.multiply(new BigInteger(num));
+            }
+            return mult;
+        }
+    }
+
+    public static void main(String[] args) {
+        String filename = "numbers.txt";
+        try {
+            System.out.println("Минимальное: " + min(filename));
+            System.out.println("Максимальное: " + max(filename));
+            System.out.println("Сумма: " + sum(filename));
+            System.out.println("Произведение: " + mult(filename));
+        } catch (IOException e) {
+            System.err.println("An error occurred: " + e.getMessage());
+        }
+    }
+}
