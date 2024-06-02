@@ -80,6 +80,59 @@ public class MainTest {
             Assertions.assertTrue(duration <= timeLimit, "Превышено время выполнения для файла размером " + size);
         }
     }
+
+    @Test
+    public void testMinPerformance() throws IOException {
+        long[] sizes = {100, 1000, 10000, 100000, 1000000}; // Размеры входного файла для тестирования
+        long timeLimit = 1500000; // Устанавливаем временной лимит
+
+        for (long size : sizes) {
+            String fileName = "numbers_" + size + ".txt";
+            FileUtil.generateNumbersFile(fileName, size);
+
+            long startTime = System.nanoTime();
+            Main.min(numbers);
+            long endTime = System.nanoTime();
+            long duration = endTime - startTime;
+
+            Assertions.assertTrue(duration <= timeLimit, "Превышено время выполнения для файла размером " + size);
+        }
+    }
+    @Test
+    public void testSumPerformance() throws IOException {
+        long[] sizes = {100, 1000, 10000, 100000, 1000000}; // Размеры входного файла для тестирования
+        long timeLimit = 1500000; // Устанавливаем временной лимит
+
+        for (long size : sizes) {
+            String fileName = "numbers_" + size + ".txt";
+            FileUtil.generateNumbersFile(fileName, size);
+
+            long startTime = System.nanoTime();
+            Main.sum(numbers);
+            long endTime = System.nanoTime();
+            long duration = endTime - startTime;
+
+            Assertions.assertTrue(duration <= timeLimit, "Превышено время выполнения для файла размером " + size);
+        }
+    }
+
+    @Test
+    public void testMultPerformance() throws IOException {
+        long[] sizes = {100, 1000, 10000, 100000, 1000000}; // Размеры входного файла для тестирования
+        long timeLimit = 1500000; // Устанавливаем временной лимит
+
+        for (long size : sizes) {
+            String fileName = "numbers_" + size + ".txt";
+            FileUtil.generateNumbersFile(fileName, size);
+
+            long startTime = System.nanoTime();
+            Main.mult(numbers);
+            long endTime = System.nanoTime();
+            long duration = endTime - startTime;
+
+            Assertions.assertTrue(duration <= timeLimit, "Превышено время выполнения для файла размером " + size);
+        }
+    }
     @Test
     public void TimeOutMinTest() {
         Assertions.assertTimeout(Duration.ofMillis(15), () -> Main.min(numbers));
